@@ -26,11 +26,13 @@ database = PGDatabase(
 
 sales_df = pd.DataFrame()
 if os.path.exists(dirname_data):
+    #выбираем из папки только нужные нам файлы
     pattern = r"\d+_\d+\.csv"
     for file_name in os.listdir(dirname_data):
         if re.match(pattern, file_name):
             file_path=os.path.join(dirname_data, file_name)
             sales_df=pd.read_csv(file_path)
+            #складываем каждый подходящий df в БД
             for i, row in sales_df.iterrows():
                 query = f"""
                 INSERT INTO sales_shop_cash (dt, shop_num, cash_num, doc_id, item, category, amount, price, discount)

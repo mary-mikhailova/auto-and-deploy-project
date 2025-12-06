@@ -34,6 +34,7 @@ def generate_date_time():
 
 def generate_csv_files(shop=4, cash=5):
     
+    #если уже сущесвуют данные за предыдущий день, зачищаем их
     pattern = r"\d+_\d+\.csv"
     for file_name in os.listdir(dirname_data):
         if re.match(pattern, file_name):
